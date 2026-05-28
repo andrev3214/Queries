@@ -73,3 +73,10 @@ create table Seguridad.Usuario(
 )
 go
 
+
+insert into Academico.Carrera(nombre,precio)
+values('Sistemas',2000)
+update Academico.Carrera set precio=1400, update_at=getdate() where id=1
+
+insert into Seguridad.Usuario(cif,nombre,email,password)values('24074378','Juan','Lopez',hashbytes('Sha2_256','Temp2026'))
+select * from Seguridad.Usuario
