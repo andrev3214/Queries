@@ -59,24 +59,27 @@ create table Seguridad.Usuario(
 	, nombre nvarchar(100) not null
 	, email nvarchar(100) not null unique
 	, password nvarchar(255) not null
-	,constraint UQ_Usuario_Email unique(email)
+	,constraint UQ_Usuario_Email unique(email) --anadir constraint para asegurar que el email sea unico
 	,check(email like '%@%.%')
 	,idCargo int not null
 	, create_at datetime default getdate()
 	, update_at datetime default null
 	, delete_at datetime
-	,constraint CHK_Usuario_Password
+	,constraint CHK_Usuario_Password  --anadir constraint para asegura que la contraseña tenga al menos 8 caracteres
 	check(len(password) >= 8)
 	,constraint FK_Usuario_Cargo
-	foreign key(idCargo)
+	foreign key(idCargo) ----agregar la clave foranea para relacionar el idCargo con la tabla Cargo
 	references Seguridad.Cargo(id)
 )
 go
 
-
+-- Insert de Usuario usando el HASHBYTES
 insert into Academico.Carrera(nombre,precio)
 values('Sistemas',2000)
 update Academico.Carrera set precio=1400, update_at=getdate() where id=1
 
 insert into Seguridad.Usuario(cif,nombre,email,password)values('24074378','Juan','Lopez',hashbytes('Sha2_256','Temp2026'))
 select * from Seguridad.Usuario
+
+SELECT * FROM Seguridad.Usuario;
+GO
